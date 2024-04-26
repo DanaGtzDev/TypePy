@@ -1,4 +1,6 @@
 use std::fs::read_to_string;
+mod langregex;
+
 //New branch
 fn read_lines(filename: &str) -> Vec<String> {
     let mut result = Vec::new();
@@ -11,10 +13,9 @@ fn read_lines(filename: &str) -> Vec<String> {
 }
 
 fn main() {
-   //"dummy/main.ty"
    let lines = read_lines("dummy/main.ty");
 
    for line in lines.iter(){
-    println!("{}", line);
+    langregex::variable_regex(line);
    }
 }
