@@ -1,5 +1,5 @@
 i: int = 1
-s: string = "Hello"
+s: string = 'Hello'
 b: bool = True
 f: float = 3.14
 a: [int] = [1, 2, 3]

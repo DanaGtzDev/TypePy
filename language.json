@@ -1,0 +1,10 @@
+[
+    {
+        "regex": "(?<IDENTIFIER>[a-z_0-9]+)\\s*(?<PUNCTUATOR_DOTDOT>:)\\s*(?<TYPE>[a-z]+)\\s*(?<PUNCTUATOR_EQUAL>=)\\s*(?<LITERAL>[0-9A-Za-z'.\\-]+)\\s*",
+        "tags": ["IDENTIFIER","PUNCTUATOR_DOTDOT","TYPE","PUNCTUATOR_EQUAL","LITERAL"]
+    },
+    {
+        "regex": "(?<KEYWORD_TYPE>type)\\s+(?<IDENTIFIER>[A-Z][a-z]*)\\s*(?<PUNCTUATOR_DOTDOT>:)\\s*",
+        "tags":["KEYWORD_TYPE","IDENTIFIER","PUNCTUATOR_DOTDOT"]
+    }
+]
