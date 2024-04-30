@@ -1,14 +1,13 @@
 mod lib;
+use lib::tokenizer::tokenize as tokenize;
 
 fn main() {
-    match lib::lang_setup::variable_regex() {
+    match tokenize("test/main.ty"){
         Ok(tokens) => {
-            for token in tokens.iter(){
-                println!("{}", token.regex);
-            }
+            println!("WIJIU");
         }
         Err(e) => {
-            println!("{}", e);
+            println!("Error");
         }
-    }
+    };
 }
