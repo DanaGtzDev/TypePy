@@ -30,47 +30,52 @@ pub fn variable_regex() {
 
 */
 
-use crate::lib::lang_setup::config as config;
-use crate::lib::file_to_string::read as read;
-use crate::lib::lang_setup::LangConfig as LangConfig;
-use std::io::Result;
+use crate::lib::file_to_string::read;
+use crate::lib::lang_setup::config;
+use crate::lib::lang_setup::LangConfig;
 use regex::Regex;
+use std::io::Result;
 
-
-pub struct Token{
+pub struct Token {
     pub token: String,
-    pub token_type: String
+    pub token_type: String,
 }
 
-fn token_generator(line: &str, conf: &Vec<LangConfig>) -> Vec<Token>{
+fn token_generator(line: &str, conf: &Vec<LangConfig>) -> Vec<Token> {
     let mut scoped_tokens: Vec<Token> = Vec::new();
-    
+    for config in conf.iter() {
+        let re = Regex::new(config.regex.as_str()).unwrap();
+        if let Some(caps) = re.captures(line){
+            for tag in config.tags.clone(){
+                let new_token = Token {
+                    token: caps[tag.as_str()].to_string(),
+                    token_type: tag
+                };
+                scoped_tokens.push(new_token);
+            }
+        }else{
+
+        }
+        
+    }
     //TODO Tokenizer
     return scoped_tokens;
 }
 
-pub fn tokenize(filename: &str) -> Result<Vec<Token>>{
-    match config("language.json"){
-        Ok(conf) => {
-            match read(filename){
-                Ok(content) => {
-                    let mut tokens: Vec<Token> = Vec::new();
-                    let lines = content.split("\\n");
-                    for line in lines{
-                        token_generator(line, &conf);
-                    }   
-                    Ok(tokens)
+pub fn tokenize(filename: &str) -> Result<Vec<Token>> {
+    match config("language.json") {
+        Ok(conf) => match read(filename) {
+            Ok(content) => {
+                let mut tokens: Vec<Token> = Vec::new();
+                let lines = content.split("\\n");
+                for line in lines {
+                    let mut new_tokens = token_generator(line, &conf);
+                    tokens.append(&mut new_tokens);
                 }
-                Err(e) => {
-                    Err(e)
-                }
+                Ok(tokens)
             }
-        }
-        Err(e) => {
-            Err(e)
-        }
+            Err(e) => Err(e),
+        },
+        Err(e) => Err(e),
     }
-    
-
-    
 }

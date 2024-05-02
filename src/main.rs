@@ -4,9 +4,11 @@ use lib::tokenizer::tokenize as tokenize;
 fn main() {
     match tokenize("test/main.ty"){
         Ok(tokens) => {
-            println!("WIJIU");
+            for token in tokens.iter(){
+                println!("{}", token.token);
+            }
         }
-        Err(e) => {
+        Err(_e) => {
             println!("Error");
         }
     };
