@@ -17,7 +17,8 @@ type declaration
 (?<KEYWORD_TYPE>type)\s+(?<IDENTIFIER>[A-Z][a-z]*)\s*(?<PUNCTUATOR_DOTDOT>:)\s*
 
 
-
+new from type
+(?<IDENTIFIER>[A-Za-z0-9]+)\s*(?<PUNCTUATOR_DOTDOT>:)\s*(?<MADEUP_TYPE>[A-Z][a-z]*)\s*(?<PUNCTUATOR_EQUAL>=)\s*(?<KEYWORD_NEW>new)\s+(?<MADEUP_TYPE_>[A-Z][a-z]*)(?<PUNCTUATOR_OPENING_PARENTHESIS>\()(?<PARAMETERS>(?:[a-z0-9"\s]+,)*\s*(?:[a-z0-9"]+)\s*)(?<PUNCTUATOR_CLOSING_PARENTHESIS>\))
 
 
 
